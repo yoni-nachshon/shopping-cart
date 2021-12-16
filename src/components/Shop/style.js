@@ -8,10 +8,25 @@ export const style = {
         gap: '12px',
         margin: '1rem'
     },
+    cart: {
+        display: 'flex',
+        justifyContent: 'center',
+        marginLeft:'1.35rem'
+    },
+    store: {
+        display: 'flex',
+        justifyContent: 'center',
+        // marginLeft:'10rem',
+        gap: '1rem',
+        width: '100vw',
+
+        
+    },
     image: {
         height: '150px',
         width: '150px',
-        margin: '2.5rem'
+        marginTop:'1rem',
+        marginLeft:'2.5rem',
     },
     empty: {
         height: '75vh',
@@ -29,7 +44,7 @@ export const style = {
     btn: {
         '&:hover': {
             cursor: 'pointer'
-          }
+        }
     }
 
 }

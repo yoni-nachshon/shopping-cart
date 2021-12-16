@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Card, Button, Offcanvas, Badge, Navbar, Container, ListGroup, CloseButton, Spinner } from "react-bootstrap";
-import { addIcon, removeIcon, cartIcon } from "../icons";
+import { Card, Button, Offcanvas, Badge, Navbar, Container, ListGroup, Spinner, FormControl } from "react-bootstrap";
+import { addIcon, removeIcon, cartIcon, xIcon } from "../icons";
 import { style } from "./style";
 import { makeStyles } from '@mui/styles';
+import { items } from "../../data";
 
 const useStyles = makeStyles(style);
 
@@ -12,23 +13,30 @@ const Shop = () => {
 
     const [show, setShow] = useState(false);
 
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState([])
+    const [search, setSearch] = useState('');
 
     const [cart, setCart] = useState([]);
     const [showInCart, setShowInCart] = useState([]);
 
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        setLoading(true)
-        getData()
-        async function getData() {
-            const data = await fetch('https://fakestoreapi.com/products')
-                .then(res => res.json())
-            setProducts(data)
+        setTimeout(() => {
+            setProducts(items)
             setLoading(false)
-        }
+        }, 2000)
     }, [])
+
+    useEffect(() => {
+        setCart(JSON.parse(localStorage.getItem('cart')))
+        setShowInCart(JSON.parse(localStorage.getItem('showInCart')))
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cart))
+        localStorage.setItem('showInCart', JSON.stringify(showInCart))
+    }, [cart, showInCart])
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -64,11 +72,6 @@ const Shop = () => {
         setShowInCart(showCartCopy)
     }
 
-    const clearCart = () => {
-        setCart([])
-        setShowInCart([])
-    }
-
     return loading ? (
 
         <div className={styles.spinner}>
@@ -77,22 +80,40 @@ const Shop = () => {
 
     ) : (
         <>
-            <Navbar  >
-                <Container >
-                    <Navbar.Brand onClick={handleShow}>{cartIcon}</Navbar.Brand>
-                </Container>
-            </Navbar>
+            <Container className={styles.store}>
+                <Navbar.Brand className={styles.btn} onClick={handleShow}>{cartIcon}</Navbar.Brand>
+                <Navbar.Brand >Store</Navbar.Brand>
+                    <FormControl
+                        style={{width:'18rem'}}
+                        type="search"
+                        placeholder="Search"
+                        className="me-2"
+                        onChange={(e) => { setSearch(e.target.value) }}
+                    />
+            </Container>
+
             <div className={styles.container} >
-                {products.map((item) => (
-                    <Card style={{ width: '15rem' }} key={item.id}>
-                        <Card.Img variant="top" src={item.image} alt="" className={styles.image} />
-                        <Card.Body >
-                            <Card.Title>{item.title}</Card.Title>
-                            <Card.Text>${item.price}</Card.Text>
-                            <Button variant="success" onClick={() => addToCart(item)} className={styles.addItem}>Add To Cart</Button>
-                        </Card.Body>
-                    </Card>
-                ))}
+                {products
+                    .filter((item) => {
+                            return item.title.toLowerCase().includes(search.toLowerCase())                                        
+                    })
+                    .map((item) => (
+                        <>
+                            <Card style={{ width: '18rem' }} >
+                                <ListGroup variant="flush">
+                                    <ListGroup.Item key={item.id}>
+                                        <Card.Img variant="top" src={item.image} alt="" className={styles.image} />
+
+                                        <Card.Title className="mt-2">{item.title}</Card.Title>
+                                        <Card.Text>${item.price}</Card.Text>
+                                        <Button  variant="success" onClick={() => addToCart(item)}>Add To Cart</Button>
+
+                                    </ListGroup.Item>
+                                </ListGroup>
+                            </Card>
+                        </>
+                    ))
+                }
                 <Offcanvas show={show} onHide={handleClose}>
                     <Offcanvas.Header closeButton>
                         <Offcanvas.Title>Shopping Cart</Offcanvas.Title>
@@ -101,13 +122,13 @@ const Shop = () => {
                         {showInCart.length ? (
 
                             showInCart.map((item) => (
-                                <Card style={{ width: '18rem' }} className={styles.container}>
+                                <Card style={{ width: '20rem' }} className={styles.cart} key={item.id}>
                                     <ListGroup variant="flush">
-                                        <ListGroup.Item key={item.id} closeButton>
-                                            <Card.Img variant="top" src={item.image} alt="" style={{ height: '50px', width: '50px' }} />
-                                            <span style={{ marginLeft: '2rem' }}>${(item.price.toFixed(2) * amountOfItems(item))}</span>
-                                            <span style={{ marginLeft: '5rem' }} onClick={() => removeFromCart(item)}><CloseButton /></span>
-                                            <div>{`${item.title}`} </div>
+                                        <ListGroup.Item closeButton>
+                                            <span style={{ float: 'right', top: '1px' }} className={styles.btn} onClick={() => removeFromCart(item)}>{xIcon}</span>
+                                            <Card.Img variant="top" src={item.image} alt="" style={{ height: '90px', width: '90px' }} />
+                                            <span style={{ marginLeft: '1rem' }}>${(item.price.toFixed(2) * amountOfItems(item))}</span>
+                                            <div><span >{item.title}</span></div>
                                             <div>
                                                 <span onClick={() => addToCart(item)} className={styles.btn}>{addIcon}</span> &nbsp;
                                                 <Badge bg="secondary">{amountOfItems(item)}</Badge> &nbsp;
@@ -117,14 +138,13 @@ const Shop = () => {
                                     </ListGroup>
                                 </Card>
                             ))
-                        ) : (<div className={styles.empty} >Your cart is empty</div>)}
-                        {showInCart.length > 0 && (
+                        ) : (
+                        <div className={styles.empty} >Your cart is empty</div>
+                        )}
+                        {showInCart.length > 0 && (                          
                             <div style={{ textAlign: 'center' }} className="me-2 mt-2">
-                                subtotal ({cart.length} items): ${cartTotal} &nbsp;
-                                <Button variant="outline-dark" size="sm" onClick={() => clearCart()}>
-                                    Clear
-                                </Button>
-                            </div>
+                                subtotal ({cart.length} items): ${cartTotal} 
+                            </div>                                               
                         )}
                     </Offcanvas.Body>
                 </Offcanvas>
