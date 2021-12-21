@@ -5,28 +5,22 @@ export const style = {
         display: 'flex',
         justifyContent: 'center',
         flexWrap: 'wrap',
-        gap: '12px',
-        margin: '1rem'
+        gap: '1rem',
+        marginTop: '1rem'
     },
     cart: {
         display: 'flex',
         justifyContent: 'center',
-        marginLeft:'1.35rem'
+        marginLeft:'1.35rem',
+        width:'20rem',        
     },
     store: {
         display: 'flex',
-        justifyContent: 'center',
-        // marginLeft:'10rem',
-        gap: '1rem',
-        width: '100vw',
-
-        
+        justifyContent: 'center',           
     },
     image: {
-        height: '150px',
-        width: '150px',
-        marginTop:'1rem',
-        marginLeft:'2.5rem',
+        height: '120px',
+        width: '120px',
     },
     empty: {
         height: '75vh',
@@ -45,6 +39,6 @@ export const style = {
         '&:hover': {
             cursor: 'pointer'
         }
-    }
-
+    },
+  
 }
