@@ -4,7 +4,9 @@ import './App.css';
 import Shop from "./components/Shop/Shop";
 
 
+
 function App() {
+
   return (
     <>         
         <div style={{textAlign:'center',marginTop:'1rem'}}>

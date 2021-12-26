@@ -6,11 +6,10 @@ import { style } from "./style";
 import { makeStyles } from '@mui/styles';
 import { items } from "../../data";
 
+
 const useStyles = makeStyles(style);
 
 const Shop = () => {
-
-    const styles = useStyles();
 
     const [show, setShow] = useState(false);
 
@@ -21,6 +20,8 @@ const Shop = () => {
     const [showInCart, setShowInCart] = useState([]);
 
     const [loading, setLoading] = useState(true)
+
+    const styles = useStyles()
 
     useEffect(() => {
         setTimeout(() => {
@@ -80,22 +81,28 @@ const Shop = () => {
         </div>
     ) : (
         <Container style={{ width: '70%' }}>
-                <Row>
-            <Navbar bg="warning" >
+            <Row>
+                <Navbar bg="warning" >
                     <Col sm={8}>
-                <Navbar.Brand>Store</Navbar.Brand>
-                <Navbar.Brand className={styles.btn} onClick={handleShow}>{cartIcon}</Navbar.Brand>
+                        <Navbar.Brand>Store</Navbar.Brand>
+                        <span onClick={handleShow} className={styles.btn}> {cartIcon} </span>
+                        {cart.length > 0 &&
+                            <span className={styles.count} >
+                                {cart.length > 0 ? cart.length : ''}
+                            </span>
+                        }
+
                     </Col>
                     <Col>
-                <FormControl
-                    type="search"
-                    placeholder="Search"
-                    onChange={(e) => { setSearch(e.target.value) }}
-                />                   
+                        <FormControl
+                            type="search"
+                            placeholder="Search"
+                            onChange={(e) => { setSearch(e.target.value) }}
+                        />
                     </Col>
-            </Navbar>
-                </Row>
-            <div className={styles.container} >
+                </Navbar>
+            </Row>
+            <div className={styles.container}>
                 {products
                     .filter((item) => {
                         return item.title.toLowerCase().includes(search.toLowerCase())
@@ -104,7 +111,6 @@ const Shop = () => {
                         <Card style={{ width: '12.5rem' }} key={item.id}>
                             <Card.Body >
                                 <Card.Img variant="top" src={item.image} alt="" className={styles.image} />
-
                                 <Card.Text className="mt-2">{item.title}</Card.Text>
                                 <Card.Text>${item.price}</Card.Text>
                                 <div className="d-grid gap-2">

@@ -11,12 +11,12 @@ export const style = {
     cart: {
         display: 'flex',
         justifyContent: 'center',
-        marginLeft:'1.35rem',
-        width:'20rem',        
+        marginLeft: '1.35rem',
+        width: '20rem',
     },
     store: {
         display: 'flex',
-        justifyContent: 'center',           
+        justifyContent: 'center',
     },
     image: {
         height: '120px',
@@ -40,5 +40,20 @@ export const style = {
             cursor: 'pointer'
         }
     },
-  
+    count: {
+        position: 'absolute',
+        bottom: '1.5rem',
+        left: '5.3rem',
+        backgroundColor: ' #0a5e11',
+        color: '#fafafa',
+        width: '14px',
+        height: '14px',
+        borderRadius: '50%',
+        fontWeight: 700,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: '8px',       
+    },
+
 }
