@@ -3,7 +3,9 @@ import { Container, Spinner } from "react-bootstrap";
 
 import { style } from "./style";
 import { makeStyles } from "@mui/styles";
+
 import { items } from "../../data";
+
 import Header from "../Header";
 import Product from "../Product";
 import Cart from "../Cart";

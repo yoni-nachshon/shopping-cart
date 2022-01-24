@@ -15,7 +15,7 @@ const Header = (props) => {
   return (
     <Row>
       <Navbar bg="warning">
-        <Col sm={8}>
+        <Col >
           <Navbar.Brand>Store</Navbar.Brand>
           <span onClick={handleShow} className={styles.btn}>
             {" "}
@@ -27,10 +27,11 @@ const Header = (props) => {
             </span>
           )}
         </Col>
-        <Col>
+        <Col >
           <FormControl
             type="search"
             placeholder="Search"
+            className={styles.input}
             onChange={(e) => setSearch(e.target.value)}
           />
         </Col>

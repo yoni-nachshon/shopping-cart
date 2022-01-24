@@ -1,7 +1,7 @@
 export const style = {   
     image: {
-      height: "120px",
-      width: "120px",
+      height: "90px",
+      width: "90px",
     },
     cardBtn: {
       border: " none",
@@ -11,6 +11,16 @@ export const style = {
           cursor: "pointer",
         },
     },
+    notFound:{
+      width: "100vw",
+      height: "50vh",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      fontSize: '20px',
+      fontWeight: 600,
+
+    }
     
   };
   

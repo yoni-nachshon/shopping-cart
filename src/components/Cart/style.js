@@ -3,7 +3,6 @@ export const style = {
         display: "flex",
         justifyContent: "center",
         marginLeft: "1.35rem",
-        margin: '1rem',
         width: "20rem",
     },
     empty: {
@@ -12,17 +11,10 @@ export const style = {
         alignItems: "center",
         justifyContent: "center",
     },
-    btn: {
-        "&:hover": {
-            cursor: "pointer",
-        },
-    },
     cardBtn: {
         border: " none",
         background: " #ffc107",
         color: "#000",
-        "&:hover": {
-            cursor: "pointer",
-        },
     },
+   
 };

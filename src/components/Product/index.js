@@ -6,15 +6,13 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles(style);
 
 const Product = (props) => {
-    const styles = useStyles()
+  const styles = useStyles()
   const { products, search, addItemToCart } = props;
+  const productList = products.filter(item => item.title.includes(search))
   return (
     <>
-      {products
-        .filter((item) => {
-          return item.title.toLowerCase().includes(search.toLowerCase());
-        })
-        .map((item) => (
+      {productList.length ?
+        productList.map((item) => (
           <Card style={{ width: "12.5rem" }} key={item.id}>
             <Card.Body>
               <Card.Img
@@ -35,7 +33,9 @@ const Product = (props) => {
               Add To Cart
             </button>
           </Card>
-        ))}
+        )
+        ) : (
+          <div className={styles.notFound}>Product not found</div>)}
     </>
   );
 };
