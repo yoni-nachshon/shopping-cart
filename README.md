@@ -1,6 +1,6 @@
 # shopping-cart 
 
-(https://yoni-nachshon.github.io/shopping-cart/).
+https://yoni-nachshon.github.io/shopping-cart
 
 ## Available Scripts
 
