@@ -12,8 +12,8 @@ export const style = {
         justifyContent: "center",
     },
     cardBtn: {
-        border: " none",
-        background: " #ffc107",
+        border: "none",
+        background: "#ffc107",
         color: "#000",
     },
    
