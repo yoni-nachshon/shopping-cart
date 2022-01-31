@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 import { style } from "./style";
 import { makeStyles } from "@mui/styles";
 
@@ -24,14 +24,14 @@ const Product = (props) => {
               <Card.Text className="mt-2">{item.title}</Card.Text>
               <Card.Text>${item.price}</Card.Text>
             </Card.Body>
-            <button
+            <Button
               className={styles.cardBtn}
               variant="warning"
               size="sm"
               onClick={() => addItemToCart(item)}
             >
               Add To Cart
-            </button>
+            </Button>
           </Card>
         )
         ) : (

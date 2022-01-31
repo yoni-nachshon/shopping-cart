@@ -7,8 +7,13 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles(style);
 
 const Cart = (props) => {
+
     const styles = useStyles();
+
     const { cart, show, handleClose, removeFromCart, addItemToCart, removeItemFromCart, cartTotal } = props;
+
+    const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+
     return (
         <Offcanvas show={show} onHide={handleClose}>
             <Offcanvas.Header closeButton>
@@ -69,7 +74,7 @@ const Cart = (props) => {
                 )}
                 {cart.length > 0 && (
                     <div style={{ textAlign: "center" }} className="me-2 mt-2">
-                        Subtotal ({cart.length} items):{" "}
+                        Subtotal ({itemCount} items):{" "}
                         <span style={{ fontWeight: 600 }}>${cartTotal}</span>
                     </div>
                 )}
