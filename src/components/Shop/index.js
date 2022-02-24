@@ -32,7 +32,8 @@ const Shop = () => {
   }, []);
 
   useEffect(() => {
-    setCart(JSON.parse(localStorage.getItem("cart")));
+    const arr = localStorage.getItem("cart")
+    setCart(arr ? JSON.parse(arr) : []);
   }, []);
 
   useEffect(() => {
@@ -83,6 +84,7 @@ const Shop = () => {
     </div>
   ) : (
     <Container style={{ width: "70%" }}>
+      <div style={{marginTop:'1rem'}}></div>
       <Header
         cart={cart}
         setSearch={setSearch}

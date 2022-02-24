@@ -1,6 +1,6 @@
 import React from "react";
 import { FormControl, Navbar, Row, Col } from "react-bootstrap";
-import { cartIcon } from "../icons";
+import { cartIcon } from "../../icons";
 import { style } from "./style";
 import { makeStyles } from "@mui/styles";
 
@@ -21,7 +21,7 @@ const Header = (props) => {
             {" "}
             {cartIcon}{" "}
           </span>
-          {cart && cart.length > 0 && (
+          {cart.length > 0 && (
             <span className={styles.count}>
               {cart.length > 0 ? cart.length : ""}
             </span>
