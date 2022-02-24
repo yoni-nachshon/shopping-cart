@@ -27,7 +27,6 @@ const Shop = () => {
   useEffect(() => {
     setTimeout(() => {
       setProducts(items);
-      console.table(items);
       setLoading(false);
     }, 2000);
   }, []);
@@ -78,10 +77,6 @@ const Shop = () => {
     setCart(updatedCart);
   };
 
-  const cartTotal = cart
-    .reduce((total, { price, quantity }) => total + price * quantity, 0)
-    .toFixed(2);
-
   return loading ? (
     <div className={styles.spinner}>
       <Spinner animation="border" role="status" />
@@ -106,7 +101,6 @@ const Shop = () => {
           removeItemFromCart={removeItemFromCart}
           removeFromCart={removeFromCart}
           addItemToCart={addItemToCart}
-          cartTotal={cartTotal}
         />
       </div>
     </Container>

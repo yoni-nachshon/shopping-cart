@@ -10,9 +10,10 @@ const Cart = (props) => {
 
     const styles = useStyles();
 
-    const { cart, show, handleClose, removeFromCart, addItemToCart, removeItemFromCart, cartTotal } = props;
+    const { cart, show, handleClose, removeFromCart, addItemToCart, removeItemFromCart } = props;
 
-    const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+    const itemCount = () => cart.reduce((total, item) => total + item.quantity, 0);
+    const cartTotal = () => cart.reduce((total, { price, quantity }) => total + price * quantity, 0).toFixed(2);
 
     return (
         <Offcanvas show={show} onHide={handleClose}>
@@ -20,7 +21,7 @@ const Cart = (props) => {
                 <Offcanvas.Title>Shopping Cart</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-                {cart.length ? (
+                {cart && cart.length ? (
                     cart.map((item) => (
                         <Card className={styles.cart} key={item.id}>
                             <ListGroup variant="flush">
@@ -72,7 +73,7 @@ const Cart = (props) => {
                 ) : (
                     <div className={styles.empty}>Your cart is empty</div>
                 )}
-                {cart.length > 0 && (
+                {cart && cart.length > 0 && (
                     <div style={{ textAlign: "center" }} className="me-2 mt-2">
                         Subtotal ({itemCount} items):{" "}
                         <span style={{ fontWeight: 600 }}>${cartTotal}</span>

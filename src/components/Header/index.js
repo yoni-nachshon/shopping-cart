@@ -21,7 +21,7 @@ const Header = (props) => {
             {" "}
             {cartIcon}{" "}
           </span>
-          {cart.length > 0 && (
+          {cart && cart.length > 0 && (
             <span className={styles.count}>
               {cart.length > 0 ? cart.length : ""}
             </span>
