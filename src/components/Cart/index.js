@@ -75,8 +75,8 @@ const Cart = (props) => {
                 )}
                 {cart && cart.length > 0 && (
                     <div style={{ textAlign: "center" }} className="me-2 mt-2">
-                        Subtotal ({itemCount} items):{" "}
-                        <span style={{ fontWeight: 600 }}>${cartTotal}</span>
+                        Subtotal ({itemCount()} items):{" "}
+                        <span style={{ fontWeight: 600 }}>${cartTotal()}</span>
                     </div>
                 )}
             </Offcanvas.Body>
