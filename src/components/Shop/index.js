@@ -44,36 +44,18 @@ const Shop = () => {
   const handleShow = () => setShow(true);
 
   const addItemToCart = (item) => {
-    const updatedCart = [...cart];
-    const updatedItemIndex = updatedCart.findIndex((i) => i.id === item.id);
-    if (updatedItemIndex < 0) {
-      updatedCart.push({ ...item, quantity: 1 });
-    } else {
-      const updatedItem = {
-        ...updatedCart[updatedItemIndex],
-      };
-      updatedItem.quantity++;
-      updatedCart[updatedItemIndex] = updatedItem;
-    }
-    setCart(updatedCart);
+    const index = cart.findIndex(i => i.id === item.id);
+    index < 0 ? cart.push({ ...item, quantity: 1 }) : cart[index].quantity++;    
+    setCart([...cart])
+  }
+
+  const decreaseQuantity = (item) => {
+    const index = cart.findIndex(i => i.id === item.id);
+    if (item.quantity > 1) cart[index].quantity--;     
+    setCart([...cart]);
   };
 
   const removeItemFromCart = (item) => {
-    const updatedCart = [...cart];
-    if (item.quantity > 1) {
-      const updatedItemIndex = updatedCart.findIndex((i) => i.id === item.id);
-      const updatedItem = { ...updatedCart[updatedItemIndex] };
-      updatedItem.quantity--;
-      if (updatedItem.quantity <= 0) {
-        updatedCart.splice(updatedItemIndex, 1);
-      } else {
-        updatedCart[updatedItemIndex] = updatedItem;
-      }
-    }
-    setCart(updatedCart);
-  };
-
-  const removeFromCart = (item) => {
     let updatedCart = cart.filter((i) => i.id !== item.id);
     setCart(updatedCart);
   };
@@ -100,8 +82,8 @@ const Shop = () => {
           cart={cart}
           show={show}
           handleClose={handleClose}
+          decrease={decreaseQuantity}
           removeItemFromCart={removeItemFromCart}
-          removeFromCart={removeFromCart}
           addItemToCart={addItemToCart}
         />
       </div>
