@@ -43,21 +43,27 @@ const Shop = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const addItemToCart = (item) => {
-    const index = cart.findIndex(i => i.id === item.id);
-    index < 0 ? cart.push({ ...item, quantity: 1 }) : cart[index].quantity++;    
+  const addItem = (item) => {
+    if(!cart.find(i => i.id === item.id)){
+      cart.push({ ...item, quantity: 1 })    
+    } 
     setCart([...cart])
-  }
+  };
 
-  const decreaseQuantity = (item) => {
+  const removeItem = (item) => {
+    const updatedCart = cart.filter((i) => i.id !== item.id);
+    setCart(updatedCart);
+  };
+  
+  const increase = (item) => {
+    cart[cart.findIndex(i => i.id === item.id)].quantity++;
+    setCart([...cart])
+  };
+
+  const decrease = (item) => {
     const index = cart.findIndex(i => i.id === item.id);
     if (item.quantity > 1) cart[index].quantity--;     
     setCart([...cart]);
-  };
-
-  const removeItemFromCart = (item) => {
-    let updatedCart = cart.filter((i) => i.id !== item.id);
-    setCart(updatedCart);
   };
 
   return loading ? (
@@ -76,15 +82,15 @@ const Shop = () => {
         <Product
           products={products}
           search={search}
-          addItemToCart={addItemToCart}
+          addItem={addItem}
         />
         <Cart
           cart={cart}
           show={show}
           handleClose={handleClose}
-          decrease={decreaseQuantity}
-          removeItemFromCart={removeItemFromCart}
-          addItemToCart={addItemToCart}
+          removeItem={removeItem}
+          increase={increase}
+          decrease={decrease}
         />
       </div>
     </Container>

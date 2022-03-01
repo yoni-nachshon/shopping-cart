@@ -18,8 +18,7 @@ const Header = (props) => {
         <Col >
           <Navbar.Brand>Store</Navbar.Brand>
           <span onClick={handleShow} className={styles.btn}>
-            {" "}
-            {cartIcon}{" "}
+            {" "}{cartIcon}{" "}
           </span>
           {cart.length > 0 && (
             <span className={styles.count}>
@@ -31,7 +30,6 @@ const Header = (props) => {
           <FormControl
             type="search"
             placeholder="Search"
-            className={styles.input}
             onChange={(e) => setSearch(e.target.value)}
           />
         </Col>

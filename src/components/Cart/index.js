@@ -10,7 +10,7 @@ const Cart = (props) => {
 
     const styles = useStyles();
 
-    const { cart, show, handleClose, removeItemFromCart, addItemToCart, decrease } = props;
+    const { cart, show, handleClose, removeItem, increase, decrease } = props;
 
     const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
     const cartTotal = cart.reduce((total, { price, quantity }) => total + price * quantity, 0).toFixed(2);
@@ -29,7 +29,7 @@ const Cart = (props) => {
                                     <span
                                         style={{ float: "right", top: "1px" }}
                                         className={styles.btn}
-                                        onClick={() => removeItemFromCart(item)}
+                                        onClick={() => removeItem(item)}
                                     >
                                         {xIcon}
                                     </span>
@@ -46,7 +46,7 @@ const Cart = (props) => {
                                     <button
                                         size="sm"
                                         variant="warning"
-                                        onClick={() => addItemToCart(item)}
+                                        onClick={() => increase(item)}
                                         className={styles.cardBtn}
                                     >
                                         {addIcon}

@@ -7,7 +7,7 @@ const useStyles = makeStyles(style);
 
 const Product = (props) => {
   const styles = useStyles()
-  const { products, search, addItemToCart } = props;
+  const { products, search, addItem } = props;
   const productList = products.filter(item => item.title.includes(search))
   return (
     <>
@@ -28,7 +28,7 @@ const Product = (props) => {
               className={styles.cardBtn}
               variant="warning"
               size="sm"
-              onClick={() => addItemToCart(item)}
+              onClick={() => addItem(item)}
             >
               Add To Cart
             </Button>
