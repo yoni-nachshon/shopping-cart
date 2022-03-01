@@ -17,14 +17,6 @@ const Header = (props) => {
       <Navbar bg="warning">
         <Col >
           <Navbar.Brand>Store</Navbar.Brand>
-          <span onClick={handleShow} className={styles.btn}>
-            {" "}{cartIcon}{" "}
-          </span>
-          {cart.length > 0 && (
-            <span className={styles.count}>
-              {cart.length > 0 ? cart.length : ""}
-            </span>
-          )}
         </Col>
         <Col >
           <FormControl
@@ -33,6 +25,18 @@ const Header = (props) => {
             onChange={(e) => setSearch(e.target.value)}
           />
         </Col>
+        <Col >
+          <div onClick={handleShow} className={styles.btn}>
+            {" "}{cartIcon}{" "}
+          </div>
+          {cart.length > 0 && (
+            <span className={styles.count}>
+              {cart.length > 0 ? cart.length : ""}
+            </span>
+          )}
+
+        </Col >
+
       </Navbar>
     </Row>
   );

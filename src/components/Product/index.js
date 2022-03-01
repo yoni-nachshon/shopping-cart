@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Button } from "react-bootstrap";
 import { style } from "./style";
 import { makeStyles } from "@mui/styles";
+import StarRating from "../StarRating";
 
 const useStyles = makeStyles(style);
 
@@ -22,7 +23,12 @@ const Product = (props) => {
                 className={styles.image}
               />
               <Card.Text className="mt-2">{item.title}</Card.Text>
-              <Card.Text>${item.price}</Card.Text>
+              <Card.Text>
+                ${item.price} 
+                <span style={{float:"right"}}>
+                <StarRating />
+               </span>
+                </Card.Text>
             </Card.Body>
             <Button
               className={styles.cardBtn}
