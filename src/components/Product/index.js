@@ -7,14 +7,17 @@ import StarRating from "../StarRating";
 const useStyles = makeStyles(style);
 
 const Product = (props) => {
-  const styles = useStyles()
+  const styles = useStyles();
   const { products, search, addItem } = props;
-  const productList = products.filter(item => item.title.includes(search))
+  const productList = products.filter((item) => item.title.includes(search));
   return (
     <>
-      {productList.length ?
+      {productList.length ? (
         productList.map((item) => (
-          <Card style={{ width: "12.5rem" }} key={item.id}>
+          <Card
+            style={{ width: "12.5rem" }}
+            key={item.id}
+          >
             <Card.Body>
               <Card.Img
                 variant="top"
@@ -24,11 +27,17 @@ const Product = (props) => {
               />
               <Card.Text className="mt-2">{item.title}</Card.Text>
               <Card.Text>
-                ${item.price} 
-                <span style={{float:"right"}}>
-                <StarRating />
-               </span>
-                </Card.Text>
+               <div style={{fontWeight: 600}}>
+                 ${item.price}
+                 </div> 
+                <div>
+                  <StarRating rating={item.rating.rate} /> 
+                     {" "}
+                  <span style={{fontWeight: 600}}>
+                    ({item.rating.count})
+                    </span> 
+                </div>
+              </Card.Text>
             </Card.Body>
             <Button
               className={styles.cardBtn}
@@ -39,9 +48,10 @@ const Product = (props) => {
               Add To Cart
             </Button>
           </Card>
-        )
-        ) : (
-          <div className={styles.notFound}>Product not found</div>)}
+        ))
+      ) : (
+        <div className={styles.notFound}>Product not found</div>
+      )}
     </>
   );
 };

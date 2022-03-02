@@ -2,17 +2,15 @@
 
 export const style = {
     btn: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "end",
       marginRight: "1rem",
+      float:"right",
         "&:hover": {
           cursor: "pointer",
         },
       },
       count: {
         position: "absolute",
-        bottom: "1.7rem",
+        bottom: "1.55rem",
         right: "1.55rem",
         background: " #000",
         color: "#ffc107",

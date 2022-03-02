@@ -1,11 +1,10 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
 
-const Star = ({ filled, onClick }) => {
+const Star = ({ filled }) => {
   return (
     <FaStar 
-     color={filled ? "orange" : "lightgray"} 
-     onClick={onClick} 
+     color={filled ? "orange" : "lightgray"}  
      />
   );
 }
