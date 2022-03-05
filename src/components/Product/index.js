@@ -14,10 +14,7 @@ const Product = (props) => {
     <>
       {productList.length ? (
         productList.map((item) => (
-          <Card
-            style={{ width: "12.5rem" }}
-            key={item.id}
-          >
+          <Card style={{ width: "12.5rem" }} key={item.id}>
             <Card.Body>
               <Card.Img
                 variant="top"
@@ -26,18 +23,9 @@ const Product = (props) => {
                 className={styles.image}
               />
               <Card.Text className="mt-2">{item.title}</Card.Text>
-              <Card.Text>
-               <div style={{fontWeight: 600}}>
-                 ${item.price}
-                 </div> 
-                <div>
-                  <StarRating rating={item.rating.rate} /> 
-                     {" "}
-                  <span style={{fontWeight: 600}}>
-                    ({item.rating.count})
-                    </span> 
-                </div>
-              </Card.Text>
+              <div style={{ fontWeight: 600 }}>${item.price}</div>
+              <StarRating rating={item.rating.rate} />{" "}
+              <span style={{ fontWeight: 600 }}>({item.rating.count})</span>
             </Card.Body>
             <Button
               className={styles.cardBtn}
